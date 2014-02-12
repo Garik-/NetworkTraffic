@@ -299,7 +299,7 @@ BOOL changeTipSize(ULONG64 total)
 	LONG64 procent = total * 100 / 26843545600;
 
 	g_nid.uFlags = NIF_TIP;
-	StringCchPrintf(g_nid.szTip,ARRAYSIZE(g_nid.szTip),_TEXT("Ñêà÷àíî %s - %d%% èç 25 ÃÁ"),szSize,procent);
+	StringCchPrintf(g_nid.szTip,ARRAYSIZE(g_nid.szTip),_TEXT("Ð¡ÐºÐ°Ñ‡Ð°Ð½Ð¾ %s - %d%% Ð¸Ð· 25 Ð“Ð‘"),szSize,procent);
 
 	return Shell_NotifyIcon(NIM_MODIFY,&g_nid);
 }
@@ -516,7 +516,7 @@ DWORD getTimeStamp()
 {
 	char * memory = (char *)g_hInstance;
 	IMAGE_DOS_HEADER *DosHeader = (IMAGE_DOS_HEADER *)memory;
-	if (DosHeader->e_magic == IMAGE_DOS_SIGNATURE) // ïðîâåðèì ñèãíàòóðó
+	if (DosHeader->e_magic == IMAGE_DOS_SIGNATURE) // Ð¿Ñ€Ð¾Ð²ÐµÑ€Ð¸Ð¼ ÑÐ¸Ð³Ð½Ð°Ñ‚ÑƒÑ€Ñƒ
 	{
 		IMAGE_NT_HEADERS * PeHeader=(IMAGE_NT_HEADERS *)(&memory[DosHeader->e_lfanew]);
 		return PeHeader->FileHeader.TimeDateStamp;
