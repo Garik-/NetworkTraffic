@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Network Monitor</title>
+    <style type="text/css">
+    	*,:after,:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html{font-size:62.5%;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.428571429;color:#333;background-color:#fff}.container,.container-fluid{padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}@media (min-width:768px){.container{width:750px}}@media (min-width:992px){.container{width:970px}}@media (min-width:1200px){.container{width:1170px}}h1,h2{font-family:inherit;font-weight:500;line-height:1.1;color:inherit;margin-top:20px;margin-bottom:10px}h1{font-size:36px}h2{font-size:30px}.text-info{color:#31708f}p{margin:0 0 10px}dl{margin-top:0;margin-bottom:20px}dd,dt{line-height:1.428571429}dt{font-weight:700}dd{margin-left:0}@media (min-width:768px){.dl-horizontal dt{float:left;width:160px;overflow:hidden;clear:left;text-align:right;text-overflow:ellipsis;white-space:nowrap}.dl-horizontal dd{margin-left:180px}}
+    </style>
+  </head>
+  <body>
+<div class="container">
+	<h1>Network Monitor</h1>
+  <p class="text-info">Трафик учитывается только в период времени с 09:00:00 до 00:59:59</p>
+  <h2>Скачано</h2>
+  <dl class="dl-horizontal">
+  <dt>За текущую сессию</dt>
+  <dd id="current"></dd>
+</dl>
+</div>
+<script language="javascript">
+function getXmlHttp(){
+  var xmlhttp;
+  try {
+    xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+  } catch (e) {
+    try {
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    } catch (E) {
+      xmlhttp = false;
+    }
+  }
+  if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+    xmlhttp = new XMLHttpRequest();
+  }
+  return xmlhttp;
+}
+
+var xmlhttp = getXmlHttp();
+xmlhttp.open("POST", self.location.href, true);
+xmlhttp.onreadystatechange=function(){ 
+  if (xmlhttp.readyState == 4) {
+     if(xmlhttp.status == 200) {
+      var json=JSON.parse(xmlhttp.responseText);
+      for(var key in json)
+      {
+        document.getElementById(key).innerText=json[key];
+      }
+      
+         }
+  }
+}
+xmlhttp.send(null);
+</script>
+  </body>
+</html>
